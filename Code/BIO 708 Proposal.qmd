@@ -1,0 +1,15 @@
+---
+title: "Untitled"
+author: Sarah Shiers
+format: pdf
+editor: visual
+bibliography: references.bib
+---
+
+## Catchy Title Goes Here
+
+Sarah Shiers, potential co-authors go here...
+
+Hyperlink to github repository: <https://github.com/SarahShiers/BIO-708>
+
+Introductory paragraph with a few citations: @vanparijs2023
