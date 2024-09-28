@@ -1,15 +1,14 @@
 ---
-title: "Untitled"
-author: Sarah Shiers
+title: "Shifting Signals: Exploring Geographic Echolocation Click Variation in Risso's Dolphins of the California Current"
+author: Sarah Shiers, Dr. Anne Simonis
+date: September 29, 2024
 format: pdf
 editor: visual
 bibliography: references.bib
 ---
 
-## Catchy Title Goes Here
+*For access to supplementary code and data related to this research, please visit the following GitHub repository:* <https://github.com/SarahShiers/BIO-708>
 
-Sarah Shiers, potential co-authors go here...
+## Introduction to Research
 
-Hyperlink to github repository: <https://github.com/SarahShiers/BIO-708>
-
-Introductory paragraph with a few citations: @vanparijs2023
+Risso's dolphins (*Grampus griseus*), members of the delphinid family, are globally distributed, with documented populations residing off the coast of California. Little is known about the global ecology of the species, including their population boundaries, population structure, and distribution on a global scale (@soldevilla2017). Their presence is observed both through vessel-based observations and by listening to their acoustic activities via passive acoustic monitoring (PAM). Risso's dolphins exhibit unique vocalizations that can be identified on spectrograms, spectral plots, and long-term spectral averages (LTSAs) using a stable and characteristic pattern of spectral peaks and notches that do not appear in the acoustic patterns of other delphinid species (@soldevilla2008). While previous research has investigated echolocation click variation between differing geographical populations of Risso's dolphins in the western North Atlantic, the Gulf of Mexico, the Hawaiian Islands, and the Southern California Bight, this project will focus on data collected from central Oregon to Central California (@soldevilla2017). This research is especially valuable at this time, given the impending construction of offshore wind energy areas in the waters of the United States West Coast, specifically in this study area. By focusing on this region and the geographic variation in Risso's dolphins present, a better understanding of the underlying environmental variables and distinct populations can be determined.
