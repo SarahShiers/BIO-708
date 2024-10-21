@@ -4,18 +4,18 @@ format: html
 editor: visual
 ---
 
-## Ch 5 of OHI Workshop: Visualization
+# Ch 5 of OHI Workshop: Visualization
 
-<http://ohi-science.org/data-science-training/ggplot2.html#plotting-with-ggplot2>
+<https://ohi-science.org/data-science-training/ggplot2.html>
 
-## Running Code
+## 5.2: Running Code
 
 ```{r}
 library("tidyverse")
 
 ```
 
-Load Data
+## **5.3: Load Data**
 
 ```{r}
 #National Parks in California
@@ -34,7 +34,7 @@ visit_16 <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science
 mass <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/mass.csv")
 ```
 
-Visualize the Data
+## **5.5: Visualize the Data**
 
 ```{r}
 ggplot(data = ca)+
@@ -47,7 +47,7 @@ ggplot(data = ca) +
     geom_point(aes(x = year, y = visitors, color = park_name))
 ```
 
-Continuing to better the plot
+## **5.7: Continuing to Better the Plot**
 
 ```{r}
 ggplot(data = ca) +
@@ -59,7 +59,7 @@ ggplot(data = ca) +
     theme(legend.title=element_blank())
 ```
 
-Now Trying for SE instead of CA
+## **5.8: Now Trying for SE Instead of CA**
 
 ```{r}
 ggplot(data = se) +
@@ -70,4 +70,463 @@ ggplot(data = se) +
     theme_bw() +
     theme(legend.title=element_blank())+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## **5.9: Introducing Faceting**
+
+```{r}
+ggplot(data = se) +
+    geom_point(aes(x = year, y = visitors, color = state)) +
+    labs(x = "Year",
+       y = "Visitation",
+       title = "Southeast States National Park Visitation") +
+    theme_bw() +
+    theme(legend.title=element_blank())+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  facet_wrap(~ state, scales = "free")
+```
+
+## **5.10: Using geom_jitter**
+
+```{r}
+ggplot(data = se) +
+    geom_jitter(aes(x = year, y = visitors, color = state,
+                width = 0.1, 
+                alpha = 0.1)) +
+    labs(x = "Year",
+       y = "Visitation",
+       title = "Southeast States National Park Visitation") +
+    theme_bw() +
+    theme(legend.title=element_blank())+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14))
+```
+
+## **Using geom_smooth and geom_line**
+
+```{r}
+ggplot(data = se) +
+    geom_smooth(aes(x = year, y = visitors, color = state)) +
+    geom_point(aes(x = year, y = visitors, color = state)) +
+    geom_line(aes(x = year, y = visitors, color = state))+
+    labs(x = "Year",
+       y = "Visitation",
+       title = "Southeast States National Park Visitation") +
+    theme_bw() +
+    theme(legend.title=element_blank())+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14))
+```
+
+## 5.11: Bar Charts
+
+```{r}
+ggplot(data = visit_16, aes(x = state)) + 
+  geom_bar()
+
+ggplot(data = visit_16, aes(x = state, y = visitors, fill = park_name)) + 
+  geom_bar(stat = "identity")
+
+ggplot(data = visit_16, aes(x = state, y = visitors, fill = park_name)) + 
+  geom_bar(stat = "identity", position = "dodge")
+```
+
+```{r}
+# Here is an example problem 
+
+ggplot(data = mass) + 
+      geom_bar(aes(x = type, fill = park_name)) +
+  labs(x = "",
+       y = "")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7))
+```
+
+## 5.12: Arranging and Exporting Plots
+
+```{r}
+my_plot <- ggplot(data = mass) + 
+      geom_bar(aes(x = type, fill = park_name)) +
+  labs(x = "",
+       y = "")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7))
+
+ggsave("name_of_file.png", my_plot, width = 15, height = 10)
+```
+
+# Ch 6 of OHI Workshop: Data Wrangling
+
+<https://ohi-science.org/data-science-training/dplyr.html>
+
+## 6.3: Load Data
+
+```{r}
+readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv') 
+
+
+```
+
+## 6.3: Read Data
+
+```{r}
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv') 
+
+gapminder
+
+head(gapminder)
+tail(gapminder)
+
+head(gapminder, 10)
+tail(gapminder, 12)
+
+str(gapminder) #displays the structure of an object
+
+names(gapminder)
+dim(gapminder)
+ncol(gapminder)
+nrow(gapminder)
+
+summary(gapminder)
+```
+
+## 6.3.2: Looking at the Variables Inside a data.frame
+
+```{r}
+gapminder$lifeExp # very long! hard to make sense of...
+head(gapminder$lifeExp) # can do the same tests we tried before
+str(gapminder$lifeExp) # it is a single numeric vector
+summary(gapminder$lifeExp) # same information, formatted slightly differently
+```
+
+## 6.4: dplyr Basics
+
+```{r}
+# filter() picks oberservations by their values
+# select() pick variables by their names
+# mutate() create new variables with functions of exsisting variables
+# summarise() collapse many values down to a single summary
+# arrange() reorder the rows
+
+# these can be used in conjunction with group_by()
+```
+
+## 6.5: filter() Subsets Data Row-Wise (Observations)
+
+```{r}
+filter(gapminder, lifeExp < 29)
+
+filter(gapminder, country == "Mexico")
+
+filter(gapminder, country %in% c("Mexico", "Peru"))
+
+filter(gapminder, country == "Mexico", year == 2002)
+
+
+# Here is an example problem
+
+filter(gapminder, country == "Brazil", year > 1986)
+
+x<- filter(gapminder, country == "Brazil", year > 1986)
+
+mean(x$lifeExp)
+```
+
+## 6.7: select() Subsets Data Column-Wise (Variables)
+
+```{r}
+select(gapminder, year, country, lifeExp) 
+
+select(gapminder, -continent, -lifeExp) # you can use - to deselect columns
+```
+
+## 6.8: Use select() and filter() Together
+
+```{r}
+gap_cambodia  <- filter(gapminder, country == "Cambodia")
+gap_cambodia2 <- select(gap_cambodia, -continent, -lifeExp) 
+```
+
+## 6.9: Meet the New Pipe %\>% Operator
+
+```{r}
+gapminder %>% head()
+
+gapminder %>% head(3)
+
+## instead of this...
+gap_cambodia  <- filter(gapminder, country == "Cambodia")
+gap_cambodia2 <- select(gap_cambodia, -continent, -lifeExp) 
+
+## ...we can do this
+gap_cambodia  <- gapminder %>% filter(country == "Cambodia")
+gap_cambodia2 <- gap_cambodia %>% select(-continent, -lifeExp) 
+
+# to chain the two operations together...
+gap_cambodia  <- gapminder %>% 
+  filter(country == "Cambodia") %>%
+  select(-continent, -lifeExp) 
+```
+
+## 6.10: mutate() Adds New Variables
+
+```{r}
+gapminder %>%
+  mutate(gdp = pop * gdpPercap)
+
+
+# Here is an example problem
+
+gapminder %>%
+  filter(continent == "Asia",
+         year == 2007) %>%
+  mutate(pop_thousands = pop/1000) %>%
+  select(country, year, pop_thousands)
+```
+
+## 6.11: group_by() Operates on Groups
+
+```{r}
+gapminder %>%
+  filter(year == 2002) %>%
+  group_by(continent) %>% 
+  mutate(cont_pop = sum(pop))
+
+gapminder %>%
+  group_by(continent) %>%
+  summarize(cont_pop = sum(pop)) %>%
+  ungroup()
+
+gapminder %>%
+  group_by(continent, year) %>%
+  summarize(cont_pop = sum(pop))
+```
+
+## 6.12: arrange() Orders Columns
+
+```{r}
+gapminder %>%
+  group_by(continent, year) %>%
+  summarize(cont_pop = sum(pop)) %>%
+  arrange(year)
+
+
+# Here is an example problem
+gapminder %>%
+  mutate(gdp = pop * gdpPercap) %>%
+  group_by(continent) %>%
+  mutate(max_gdp = max(gdp)) %>%
+  filter(gdp == max_gdp)
+
+# Here is another example problem
+asia_life_exp <- gapminder %>%
+  filter(continent == 'Asia') %>%
+  group_by(country) %>%
+  filter(lifeExp == max(lifeExp)) %>%
+  arrange(year) 
+```
+
+## 6.13: All Together Now
+
+```{r}
+## gapminder-wrangle.R
+## J. Lowndes lowndes@nceas.ucsb.edu
+
+
+## load libraries
+library(tidyverse) ## install.packages('tidyverse')
+
+## read in data
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv') 
+
+## summarize
+gap_max_life_exp <- gapminder %>% 
+  dplyr::select(-continent, -lifeExp) %>% # or select(country, year, pop, gdpPercap)
+  dplyr::group_by(country) %>%
+  dplyr::mutate(gdp = pop * gdpPercap) %>%
+  dplyr::summarize(max_gdp = max(gdp)) %>%
+  dplyr::ungroup() 
+
+gapminder <- read.csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv', stringsAsFactors = FALSE) 
+x1  <- gapminder[ , c('country', 'year', 'pop', 'gdpPercap') ]# subset columns
+mex <- x1[x1$country == "Mexico", ] # subset rows
+mex$gdp <- mex$pop * mex$gdpPercap # add new columns
+mex$max_gdp <- max(mex$gdp)
+```
+
+## 6.14: Joining Datasets
+
+```{r}
+## read in the data. (same URL as yesterday, with co2.csv instead of gapminder.csv)
+co2 <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/co2.csv")
+
+## explore
+co2 %>% head()
+co2 %>% dim() # 12
+
+## create new variable that is only 2007 data
+gap_2007 <- gapminder %>%
+  filter(year == 2007) 
+gap_2007 %>% dim() # 142  
+
+## left_join gap_2007 to co2
+lj <- left_join(gap_2007, co2, by = "country")
+
+## explore
+lj %>% dim() #142
+lj %>% summary() # lots of NAs in the co2_2017 columm
+lj %>% View() 
+
+## right_join gap_2007 and co2
+rj <- right_join(gap_2007, co2, by = "country")
+
+## explore
+rj %>% dim() # 12
+rj %>% summary()
+rj %>% View() 
+```
+
+# Ch 7 of OHI Workshop: Data Wrangling
+
+<https://ohi-science.org/data-science-training/tidyr.html>
+
+## 7.4: gather() Data From Wide
+
+```{r}
+## wide format
+gap_wide <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder_wide.csv')
+
+head(gap_wide)
+str(gap_wide)
+
+gap_long <- gap_wide %>% 
+  gather(key   = obstype_year,
+         value = obs_values)
+
+str(gap_long)
+head(gap_long)
+tail(gap_long)
+
+# ----------------------------------------------------
+gap_long <- gap_wide %>% 
+  gather(key   = obstype_year,
+         value = obs_values,
+         dplyr::starts_with('pop'),
+         dplyr::starts_with('lifeExp'),
+         dplyr::starts_with('gdpPercap'))  #here i'm listing all the columns to use in gather
+
+str(gap_long)
+head(gap_long)
+tail(gap_long)
+
+# ----------------------------------------------------
+gap_long <- gap_wide %>% 
+  gather(key   = obstype_year,
+         value = obs_values,
+         -continent, -country)
+
+str(gap_long)
+head(gap_long)
+tail(gap_long)
+
+# ----------------------------------------------------
+gap_long <- gap_wide %>% 
+  gather(key   = obstype_year,
+         value = obs_values,
+         -continent, -country) %>%
+  separate(obstype_year,
+           into = c('obs_type','year'),
+           sep = "_",
+           convert = TRUE) #this ensures that the year column is an integer rather than a character
+
+str(gap_long)
+head(gap_long)
+tail(gap_long)
+```
+
+## 7.5: Plot Long Format Data
+
+```{r}
+# Canada's life expectancy
+canada_df <- gap_long %>%
+  filter(obs_type == "lifeExp",
+         country == "Canada")
+
+ggplot(canada_df, aes(x = year, y = obs_values)) +
+  geom_line()
+```
+
+```{r}
+# Life expectancies in the Americas
+life_df <- gap_long %>%
+  filter(obs_type == "lifeExp",
+         continent == "Americas")
+
+ggplot(life_df, aes(x = year, y = obs_values, color = country)) +
+  geom_line()
+```
+
+```{r}
+# Here is an example problem
+continents <- gap_long %>% 
+  filter(obs_type == "lifeExp", 
+         year > 1980) %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_le = mean(obs_values)) %>%
+  ungroup()
+
+ggplot(data = continents, aes(x = year, y = mean_le, color = continent)) + 
+  geom_line() +
+  labs(title = "Mean life expectancy",
+       x = "Year",
+       y = "Age (years)") 
+
+#Further customization as seen in the chapter
+ggplot(data = continents, aes(x = year, y = mean_le, color = continent)) + 
+  geom_line() +
+  labs(title = "Mean life expectancy",
+       x = "Year",
+       y = "Age (years)",
+       color = "Continent") +
+  theme_classic() +
+  scale_fill_brewer(palette = "Blues")  
+```
+
+## 7.6: spread()
+
+```{r}
+gap_normal <- gap_long %>% 
+  spread(obs_type, obs_values)
+
+dim(gap_normal)
+dim(gapminder)
+names(gap_normal)
+names(gapminder)
+
+# Here is an example problem
+head(gap_long)
+
+gap_wide_new <- gap_long %>% 
+  # first unite obs_type and year into a new column called var_names. Separate by _
+  unite(col = var_names, obs_type, year, sep = "_") %>% 
+  # then spread var_names out by key-value pair.
+  spread(key = var_names, value = obs_values)
+str(gap_wide_new)
+```
+
+## 7.7: complete()
+
+```{r}
+kelpdf <- data.frame(
+  Year = c(1999, 2000, 2004, 1999, 2004),
+  Taxon = c("Saccharina", "Saccharina", "Saccharina", "Agarum", "Agarum"),
+  Abundance = c(4,5,2,1,8)
+)
+
+kelpdf
+
+kelpdf %>%
+  complete(Year, Taxon)
+
+kelpdf %>% complete(Year, Taxon, fill = list(Abundance = 0))
+
+kelpdf %>% complete(Year = full_seq(Year, period = 1),
+                   Taxon,
+                   fill = list(Abundance = 0))
 ```
