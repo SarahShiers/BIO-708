@@ -1,0 +1,100 @@
+---
+title: "Shifting signals: Exploring geographic variation in echolocation clicks of Risso's dolphins in the California Current"
+author: "Sarah Shiers, Dr. Anne Simonis"
+date: October 27, 2024
+format: pdf
+editor: visual
+---
+
+*For access to supplementary code and data related to this research, please visit the following GitHub repository:* <https://github.com/SarahShiers/BIO-708>
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = 'hide', fig.cap = "Geographic distribution of detections of Risso's dolphins in the California Current. Each point represents a detection, highlighting the spatial variability of detections across the surveyed area."}
+# This graph will plot Dg Detections based off of their latitude and longitude
+
+#| label: Gg-Detections-Latitude-And-Longitude
+#| fig-cap: "Geographic distribution of detections of Risso's dolphins in the California Current. Each point represents a detection, highlighting the spatial variability of detections across the surveyed area."
+
+library("tidyverse")
+library("dplyr")
+library("ggplot2")
+
+# Load Data
+read_csv("C:/Users/sarah/OneDrive/Documents/GitHub/BIO-708/ADRIFT_AllDetections_wGPS.csv")
+
+# Label Data
+ADRIFT_AllDetections <- read_csv("C:/Users/sarah/OneDrive/Documents/GitHub/BIO-708/ADRIFT_AllDetections_wGPS.csv")
+
+# View Data
+ADRIFT_AllDetections
+
+# Filter Data to Only Show Risso's (Gg) Detections
+ADRIFT_AllDetections %>%
+  filter(species == "Gg")
+
+# Label Filtered Data
+ADRIFT_GgDetections <- ADRIFT_AllDetections %>%
+  filter(species == "Gg")
+
+# Get map data for California and Oregon
+state_map <- map_data("state") %>%
+  filter(region %in% c("california", "oregon"))
+
+# Define latitude and longitude boundaries for zooming in
+lon_bounds <- c(-130, -118)  # Adjust as needed
+lat_bounds <- c(30, 46)      # Adjust as needed
+
+# Create Scatterplot Depicting Locations of Gg Detections in Correlation to Latitude and Longitude
+ggplot() +
+  geom_polygon(data = state_map, aes(x = long, y = lat, group = group), 
+               fill = "grey90", color = "grey60") +
+  geom_point(data = ADRIFT_GgDetections, aes(x = Longitude, y = Latitude), 
+             color = "blue", size = 0.5) +
+  labs(x = "Longitude", y = "Latitude") +
+  coord_quickmap(xlim = lon_bounds, ylim = lat_bounds) + 
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.grid.minor = element_blank())
+```
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = 'hide', fig.cap = "Number of Risso's dolphin detections by survey (ADRIFT, CCES, and PASCAL). Each bar represents the sum of detections from each survey, emphasizing variations in detection rates among the surveys."}
+# This graph will display how many Gg detections occurred per overall survey (ie ADRIFT, CCES, PASCAL)
+
+#| label: Gg-Detections_SurveyName
+#| fig-cap: "Number of Risso's dolphin detections by survey(ADRIFT, CCES, and PASCAL). Each bar represents the sum of detections from each survey, emphasizing variations in detection rates among the surveys."
+
+# To improve aesthetics
+library("RColorBrewer")
+
+# Extract just the survey name (without numbers) from the DriftNames column to create a new column
+ADRIFT_GgDetections %>%
+  mutate(SurveyName = gsub("_\\d+", "", DriftName))
+
+ADRIFT_GgDetections <- ADRIFT_GgDetections %>%
+  mutate(SurveyName = gsub("_\\d+", "", DriftName))
+
+# Count the number of detections for each SurveyName
+ADRIFT_GgDetections %>%
+  group_by(SurveyName) %>%
+  summarise(Count = n())
+
+GgDetections_SurveyCounts <- ADRIFT_GgDetections %>%
+  group_by(SurveyName) %>%
+  summarise(Count = n())
+
+#Create a bar plot to display the data
+ggplot(GgDetections_SurveyCounts, aes(x = SurveyName, y = Count, fill = SurveyName)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Survey", 
+       y = "Number of Detections") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Blues") +
+  theme(
+    panel.grid.major.x = element_blank(), 
+    panel.grid.minor.x = element_blank(), 
+    panel.grid.major.y = element_line(color = "lightgray"),  
+    panel.grid.minor.y = element_blank(),
+    legend.position = "none"
+  )
+```
