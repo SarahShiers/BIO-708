@@ -1,0 +1,83 @@
+---
+title: "Shifting signals: Exploring geographic variation
+ in echolocation clicks of Risso’s dolphins in the
+ California Current"
+author: Sarah Shiers, Dr. Anne Simonis
+date: November 17, 2024
+format: pdf
+editor: visual
+---
+
+## Project Description **(1500-word maximum)**
+
+**Clear description of the project, its goals and significance**
+
+**Clearly stated hypotheses or objectives**
+
+1.  
+
+**Experimental design and methodology**
+
+**Data analysis plan**
+
+## References
+
+## Timeline (250-word maximum)
+
+-   **August 2024 - December 2024**
+
+    I familiarized myself with the ADRIFT, CCES, and PASCAL data, read numerous scientific papers, and established a research plan.
+
+-   **January 2025 - May 2025**
+
+    Begin exploration of and familiarization with possible data analysis programs and tools, and start analysis of Gg detections.
+
+-   **May 15, 2025**
+
+    Receive the Coale Graduate Scholar Award.
+
+-   **June 2025 - August 2025**
+
+    Throughout the summer, in depth analysis of Gg detections will be conducted using \_\_\_.
+
+-   **September 2025 - December 2025**
+
+    Continued analysis of Gg detections focused on visualization of findings, preparation for, and presentation of, my research in progress.
+
+-   **January 2026 - May 2026**
+
+    Write thesis manuscript, prepare thesis defense presentation, meet regularly with my thesis advisory committee.
+
+-   **May 2026**
+
+    Defend thesis and graduate.
+
+## Need for Research (250-word maximum)
+
+As California pursues offshore wind energy development, there is a critical need for research on its effects on marine mammals, particularly Risso's dolphins. While studies on the environmental impacts of offshore wind projects are increasing, there is limited data on how these developments affect cetaceans in the California Current, particularly regarding population structure and acoustic behavior.
+
+Risso's dolphins, known for their complex echolocation patterns, provide important insights into the health of marine ecosystems. Understanding their distribution and variability in echolocation click types is vital for refining stock assessments and improving management strategies. Furthermore, acoustic disturbances from wind energy infrastructure pose a potential threat to these populations, yet few studies have examined the potential long-term impacts on dolphin behavior and communication.
+
+This research will address key knowledge gaps by analyzing the geographic variability of echolocation clicks, which will help identify population structures and inform conservation measures. By incorporating this information into marine mammal management, California can develop adaptive strategies to mitigate impacts on dolphins while advancing its offshore wind energy goals. This research directly supports the state's efforts to balance the rapid growth of renewable energy with the protection of marine biodiversity, ensuring that policy decisions are informed by robust scientific data.
+
+## Relevance to state of California (100-word maximum)
+
+As California advances offshore wind energy, understanding its effects on marine ecosystems is critical for informed policy decisions. This research on Risso’s dolphins will provide the data needed to refine stock assessments and support the state’s marine management framework. By improving knowledge of dolphin distribution and acoustic behavior, the study helps policymakers and stakeholders design mitigation strategies that minimize ecological disruption. The findings will directly inform California’s efforts to balance renewable energy growth with the protection of marine species, ensuring sustainable development that aligns with state conservation goals and enhances the resilience of marine ecosystems.
+
+## Budget
+
+| Item / Description | Unit Price | Quantity | Amount to Awardee (via Financial Aid) | Amount to Department |
+|----|----|----|----|----|
+| SFSU Tuition | \$687.00 / sem | 2 | \$1,374.00 | -- |
+| Living Expenses | \$787.50 / mo | 3 | \$2,362.50 | -- |
+| Gas | \$62.00 / tank | 4.25 | \$263.50 | -- |
+
+Grand Total: \$4,000.00
+
+## Justification (250-word maximum)
+
+The Dr. Kenneth H. Coale Graduate Scholar Award would be invaluable in advancing my research on Risso’s dolphins in the California Current and helping me manage the high cost of living in the Bay Area. While this award will not fully cover my expenses, it would make a critical difference by reducing tuition and essential living costs, allowing me to focus on my work without significant financial distraction. In a high-cost area like San Francisco, this support is essential for balancing academic commitments and financial responsibilities.
+
+Additionally, the funds allocated for transportation would support my weekly 20-mile commute from the Estuary & Ocean Science Center (EOS) to the main campus, where I meet with faculty, attend mandatory classes, and access specialized resources. This regular commute is essential to fulfilling my degree requirements and ensuring academic progress, as the EOS center is geographically distant from core campus resources. Covering these travel expenses would allow me to prioritize time for my research while still meeting all campus obligations.
+
+This financial support is especially critical in the final stages of my thesis work, where uninterrupted focus and access to both EOS and campus facilities are necessary for completing my analysis on dolphin acoustic data. In sum, the award would directly support my academic success and ensure I can meet the logistical demands of my research, allowing me to fully apply my efforts toward producing findings that will benefit California’s marine conservation efforts.

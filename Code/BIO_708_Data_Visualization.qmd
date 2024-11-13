@@ -17,12 +17,10 @@ editor: visual
 library("tidyverse")
 library("dplyr")
 library("ggplot2")
-
-# Load Data
-read_csv("C:/Users/sarah/OneDrive/Documents/GitHub/BIO-708/ADRIFT_AllDetections_wGPS.csv")
+library("readxl")
 
 # Label Data
-ADRIFT_AllDetections <- read_csv("C:/Users/sarah/OneDrive/Documents/GitHub/BIO-708/ADRIFT_AllDetections_wGPS.csv")
+ADRIFT_AllDetections <- read_excel("C:/Users/sarah/OneDrive/Documents/GitHub/BIO-708/Code/ADRIFT_AllDetections_wGPS.xlsx", col_types=c('date','numeric','numeric','text','text','date','text','numeric'))
 
 # View Data
 ADRIFT_AllDetections
